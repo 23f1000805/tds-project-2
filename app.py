@@ -70,7 +70,30 @@ MODEL_HIERARCHY = [
 
 MAX_RETRIES_PER_KEY = 2
 TIMEOUT = 30
-QUOTA_KEYWORDS = ["quota", "exceeded", "rate limit", "403", "too many requests"]
+# QUOTA_KEYWORDS = ["quota", "exceeded", "rate limit", "403", "too many requests"]
+QUOTA_KEYWORDS = [          "quota", 
+                            "exceeded",
+                            "rate limit",
+                            "403", 
+                            "too many requests",
+                            "quota exceeded", 
+                            "rate limit", 
+                            "too many requests",
+                            "resource exhausted",
+                            "deadline exceeded", 
+                            "unavailable",
+                            "internal error",
+                            "service unavailable",
+                            "temporarily overloaded",
+                            "connection reset",
+                            "timeout",
+                            "consumer_suspended", 
+                            "permission denied", 
+                            "invalid api key",
+                            "unauthorized",
+                            "access not configured",
+                            "key not valid",
+                            "not authorized"]
 
 if not GEMINI_KEYS:
     raise RuntimeError("No Gemini API keys found. Please set them in your environment.")
