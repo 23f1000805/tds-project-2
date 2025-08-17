@@ -99,7 +99,6 @@ if not GEMINI_KEYS:
     raise RuntimeError("No Gemini API keys found. Please set them in your environment.")
 
 # -------------------- LLM wrapper --------------------
-
 class LLMWithFallback:
     def __init__(self, keys=None, models=None, temperature=0):
         self.keys = keys or GEMINI_KEYS
