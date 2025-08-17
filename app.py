@@ -102,8 +102,8 @@ if not GEMINI_KEYS:
 
 class LLMWithFallback:
     def __init__(self, keys=None, models=None, temperature=0):
-        self.keys = GEMINI_KEYS
-        self.models = MODEL_HIERARCHY
+        self.keys = keys or GEMINI_KEYS
+        self.models = models or MODEL_HIERARCHY
         self.temperature = temperature
         self.slow_keys_log = defaultdict(list)
         self.failing_keys_log = defaultdict(int)
@@ -114,13 +114,12 @@ class LLMWithFallback:
         for model in self.models:
             for key_index, key in enumerate(self.keys):
                 try:
+                    print(f"✅ Using gemini_api_{key_index + 1}: ....{key[-5:]} for model {model}")
                     llm_instance = ChatGoogleGenerativeAI(
                         model=model,
                         temperature=self.temperature,
                         google_api_key=key
                     )
-                    llm_instance.invoke("ping")  
-                    print(f"✅ Using gemini_api_{key_index + 1}: ....{key[-5:]} for model {model}")
                     self.current_llm = llm_instance
                     return llm_instance
                 except Exception as e:
@@ -142,6 +141,7 @@ class LLMWithFallback:
     def invoke(self, prompt):
         llm_instance = self._get_llm_instance()
         return llm_instance.invoke(prompt)
+
 
 
 
